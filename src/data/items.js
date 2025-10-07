@@ -23,6 +23,7 @@ const items = [
       "Emmentaler (Zak 1KG)",
       "Fries (Zak 1500GR)",
       "Gehakt Beef Crumble Halal (Zak 1KG)",
+      "Halal Shoarma (Zak 1KG)",
       "Ham Gegrild (Zak 1KG)",
       "Hotdog Chicken Halal (Pak 500GR)",
       "Italian Salad (Bak)",
