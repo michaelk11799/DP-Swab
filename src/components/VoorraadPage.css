@@ -1,0 +1,16 @@
+/* src/components/VoorraadPage.css */
+
+/* Container neemt niets over qua achtergrond */
+.voorraad-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* De box gebruikt de gedeelde styling uit App.css (.voorraad-box),
+   hier alleen eventuele kleine aanvullingen */
+.voorraad-box h2 {
+  margin: 0 0 14px 0;
+  text-align: center;
+  color: #333;
+}
