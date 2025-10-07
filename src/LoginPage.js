@@ -19,37 +19,44 @@ export default function LoginPage({ setUser }) {
     }
 
     try {
+      console.log("🔎 Inloggen gestart met code:", code.trim(), "en wachtwoord:", password);
+
       const docRef = doc(db, "codes", code.trim());
       const docSnap = await getDoc(docRef);
 
       if (!docSnap.exists()) {
+        console.warn("⚠️ Geen document gevonden voor code:", code.trim());
         setError("Code niet gevonden.");
         return;
       }
 
       const data = docSnap.data();
+      console.log("✅ Firestore document gevonden:", data);
 
-      if (data.password !== password) {
+      // wachtwoord vergelijken als string
+      if (String(data.password) !== String(password)) {
+        console.warn("❌ Wachtwoord mismatch. Ingevoerd:", password, "Uit Firestore:", data.password);
         setError("Wachtwoord klopt niet.");
         return;
       }
 
       // login succesvol
+      console.log("🎉 Login succesvol voor gebruiker:", data.name);
+
       const userData = {
         code: code.trim(),
         name: data.name || "(geen naam)",
         isAdmin: data.isAdmin || false,
       };
 
-      // login bewaren + expiry
-      const expiresAt = Date.now() + 10 * 60 * 1000; // 10 minuten
+      const expiresAt = Date.now() + 10 * 60 * 1000;
       localStorage.setItem("user", JSON.stringify({ user: userData, expiresAt }));
 
       setUser(userData);
       setCode("");
       setPassword("");
     } catch (err) {
-      console.error("Login fout:", err);
+      console.error("💥 Login fout:", err);
       setError("Er is iets misgegaan. Probeer opnieuw.");
     }
   };
