@@ -4,13 +4,13 @@ import { getFirestore } from "firebase/firestore";
 
 // Vul hier jouw Firebase config in
 const firebaseConfig = {
-  apiKey: "AIzaSyBFClTpH-Vk0uJbjRwx9dpoZzCg8jJtQ54",
-  authDomain: "dominos-lening-tracker.firebaseapp.com",
-  projectId: "dominos-lening-tracker",
-  storageBucket: "dominos-lening-tracker.firebasestorage.app",
-  messagingSenderId: "577483653469",
-  appId: "1:577483653469:web:da348f8a19b7b71f50e8b4",
-  measurementId: "G-0YX12FT8MK"
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID
 };
 
 // Initialize Firebase
