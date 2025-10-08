@@ -61,7 +61,7 @@
   text-align: left;
 }
 
-/* Tabel */
+/* Desktop tabel */
 .voorraad-table {
   width: 100%;
   border-collapse: collapse;
@@ -82,7 +82,7 @@
   font-weight: 600;
 }
 
-/* Buttons in tabel */
+/* Knoppen in tabel */
 .voorraad-table button {
   background-color: #ef4444;
   color: white;
@@ -97,7 +97,7 @@
   background-color: #c62828;
 }
 
-/* ✅ Mobile card view */
+/* ✅ Mobile compact card view */
 @media (max-width: 600px) {
   .voorraad-table,
   .voorraad-table thead,
@@ -114,19 +114,21 @@
   }
 
   .voorraad-table tr {
-    margin-bottom: 1rem;
+    margin: 0 0 0.6rem 0;
     border: 1px solid #ddd;
-    border-radius: 6px;
-    padding: 0.5rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    padding: 0.3rem;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+    background: #fff;
   }
 
   .voorraad-table td {
     display: flex;
     justify-content: space-between;
-    padding: 0.5rem;
+    padding: 0.3rem 0.4rem;
     border: none;
-    border-bottom: 1px solid #eee;
+    font-size: 0.8rem;
+    line-height: 1.2;
   }
 
   .voorraad-table td:last-child {
@@ -135,8 +137,14 @@
 
   .voorraad-table td::before {
     content: attr(data-label);
-    font-weight: bold;
+    font-weight: 600;
     color: #0066b3;
-    margin-right: 0.5rem;
+    margin-right: 0.3rem;
+    flex-shrink: 0;
+  }
+
+  .table-responsive {
+    margin: 0;
+    padding: 0;
   }
 }
