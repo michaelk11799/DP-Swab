@@ -40,7 +40,7 @@ body {
   gap: 40px;
   padding: 24px;
   box-sizing: border-box;
-  margin: 0 auto; /* 🔹 zorgt dat container zelf altijd gecentreerd is */
+  margin: 0 auto;
 }
 
 .dashboard-box,
@@ -54,13 +54,13 @@ body {
   width: 100%;
   max-width: 400px;
   text-align: center;
-  margin: 0 auto; /* 🔹 forceer centrering */
+  margin: 0 auto;
   box-sizing: border-box;
 }
 
 .voorraad-box {
   max-width: 1000px;
-  margin: 24px auto 0 auto; /* 🔹 netjes gecentreerd */
+  margin: 24px auto 0 auto;
 }
 
 .dashboard-logo {
@@ -136,7 +136,7 @@ body {
   .page-container {
     flex-direction: column;
     gap: 20px;
-    padding: 8px;        /* 🔹 minder padding zodat niets opschuift */
+    padding: 8px;
     margin: 0 auto;
   }
 
@@ -144,7 +144,7 @@ body {
   .voorraad-box,
   .login-box {
     max-width: 100% !important;
-    width: calc(100% - 16px); /* 🔹 8px marge links en rechts */
+    width: calc(100% - 16px);
     margin: 0 auto !important;
     padding: 16px;
   }
