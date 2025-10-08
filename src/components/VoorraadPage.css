@@ -55,7 +55,7 @@
   width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
-  overflow-x: hidden; /* 🔹 horizontale scroll killen */
+  overflow-x: hidden; /* horizontale scroll weg */
 }
 
 .voorraad-table {
@@ -90,20 +90,19 @@
 }
 .voorraad-table button:hover { background-color: #c62828; }
 
-/* 🔹 Mobile card-stijl + perfecte centrering */
+/* 🔹 Mobile card-stijl + fine-tune centrering */
 @media (max-width: 600px) {
-  .voorraad-container,
-  .voorraad-box,
-  .table-responsive,
-  .voorraad-table {
-    width: 100% !important;
-    max-width: 100% !important;
+  .voorraad-container {
+    justify-content: center;
+    align-items: center;
     margin: 0 auto !important;
-    padding: 0 !important;
-    box-sizing: border-box;
+    width: 100% !important;
   }
 
   .voorraad-box {
+    margin: 0 auto !important;
+    width: 95% !important;   /* 🔥 iets smaller zodat hij optisch perfect gecentreerd staat */
+    max-width: 95% !important;
     padding: 1rem !important;
   }
 
