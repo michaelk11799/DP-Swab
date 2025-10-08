@@ -1,4 +1,3 @@
-/* ========== Basis & gradient (alleen op body) ========== */
 :root {
   --dom-blue: #0066b3;
   --dom-red:  #e31837;
@@ -7,7 +6,8 @@
 html, body, #root {
   height: 100%;
   margin: 0;
-  overflow-x: hidden; /* 🔥 geen horizontale scroll */
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 body {
@@ -17,14 +17,12 @@ body {
   animation: gradientAnimation 15s ease infinite;
 }
 
-/* Gradient animatie */
 @keyframes gradientAnimation {
   0%   { background-position: 0% 50%; }
   50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* ========== Centrale layout voor alle pagina’s ========== */
 .app-main {
   min-height: 100vh;
   display: flex;
@@ -36,34 +34,30 @@ body {
   width: 100%;
   max-width: 1200px;
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
   gap: 40px;
   padding: 24px;
   box-sizing: border-box;
-  flex-wrap: wrap;
 }
 
-/* ========== Box-styling (dashboard, voorraad) ========== */
-.dashboard-box {
+.dashboard-box,
+.voorraad-box,
+.login-box {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: saturate(120%) blur(0px);
   padding: 24px;
   border-radius: 12px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
-  max-width: 400px;
   width: 100%;
+  max-width: 400px;
   text-align: center;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .voorraad-box {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: saturate(120%) blur(0px);
-  padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-  width: 100%;
   max-width: 1000px;
   margin-top: 24px;
 }
@@ -72,21 +66,6 @@ body {
   display: block;
   margin: 0 auto 16px;
   width: 180px;
-}
-
-/* ========== Login box ========== */
-.login-box {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: saturate(120%) blur(0px);
-  padding: 32px;
-  border-radius: 12px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
-  max-width: 400px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
 }
 
 .login-box img {
@@ -102,7 +81,8 @@ body {
   align-items: center;
 }
 
-.login-form input {
+.login-form input,
+.login-form button {
   width: 100%;
   padding: 10px;
   margin-bottom: 12px;
@@ -110,17 +90,15 @@ body {
   border: 1px solid #ccc;
   font-size: 1em;
   text-align: center;
+  box-sizing: border-box;
 }
 
 .login-form button {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 8px;
   background-color: var(--dom-red);
   color: white;
   font-weight: bold;
   cursor: pointer;
+  border: none;
   transition: filter .15s ease;
 }
 .login-form button:hover { filter: brightness(.92); }
@@ -131,7 +109,6 @@ body {
   margin-bottom: 12px;
 }
 
-/* Dashboard knoppen */
 .nav-buttons {
   display: flex;
   flex-direction: column;
@@ -139,7 +116,6 @@ body {
   width: 100%;
 }
 .nav-btn {
-  display: block;
   text-decoration: none;
   background-color: var(--dom-red);
   color: #fff;
@@ -154,47 +130,7 @@ body {
 .nav-btn:hover { filter: brightness(.92); }
 .logout-btn { background-color: var(--dom-blue); }
 
-/* Voorraad formulier/tabel */
-.voorraad-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-  margin-bottom: 16px;
-}
-.voorraad-form select,
-.voorraad-form button {
-  padding: 8px 10px;
-  border-radius: 6px;
-  border: 1px solid #cfcfcf;
-  font-size: 0.95rem;
-}
-.voorraad-form button {
-  background: var(--dom-red);
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  transition: filter .15s ease;
-}
-.voorraad-form button:hover { filter: brightness(.92); }
-
-.voorraad-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 6px;
-  font-size: 0.95rem;
-}
-.voorraad-table th, .voorraad-table td {
-  border: 1px solid #e6e6e6;
-  padding: 8px;
-  text-align: center;
-}
-.voorraad-table th {
-  background: var(--dom-blue);
-  color: #fff;
-}
-
-/* 🔹 Mobile optimalisatie */
+/* 🔹 Mobile fix */
 @media (max-width: 600px) {
   .page-container {
     flex-direction: column;
@@ -206,7 +142,6 @@ body {
   .voorraad-box,
   .login-box {
     max-width: 100%;
-    margin: 0;
     padding: 16px;
   }
 
