@@ -42,7 +42,7 @@
 }
 
 .personeel-form button {
-  background-color: #ef4444;
+  background-color: #e21b24;
   color: white;
   cursor: pointer;
   border: none;
@@ -64,6 +64,7 @@
   table-layout: fixed;
 }
 
+/* Zelfde styling als voorraad-table */
 .personeel-table th,
 .personeel-table td {
   border: 1px solid #ddd;
@@ -72,22 +73,47 @@
   word-break: break-word;
 }
 
-/* Kolommen */
-.personeel-table th:nth-child(1),
-.personeel-table td:nth-child(1) { min-width: 120px; }
-.personeel-table th:nth-child(2),
-.personeel-table td:nth-child(2) { min-width: 120px; }
-.personeel-table th:nth-child(3),
-.personeel-table td:nth-child(3) { min-width: 180px; }
-.personeel-table th:nth-child(4),
-.personeel-table td:nth-child(4) { min-width: 80px; text-align: center; }
-.personeel-table th:nth-child(5),
-.personeel-table td:nth-child(5) { min-width: 120px; }
-.personeel-table th:nth-child(6),
-.personeel-table td:nth-child(6) { min-width: 140px; }
-.personeel-table th:nth-child(7),
-.personeel-table td:nth-child(7) { min-width: 100px; }
+/* Header kleur (zelfde blauw/wit als voorraad) */
+.personeel-table thead th {
+  background-color: #0066b3; /* exact zelfde donkerblauw als VoorraadPage */
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;  /* zelfde als VoorraadPage */
+}
 
+/* Kolombreedtes (7 kolommen) */
+.personeel-table th:nth-child(1),
+.personeel-table td:nth-child(1) { min-width: 120px; }  /* Van winkel */
+.personeel-table th:nth-child(2),
+.personeel-table td:nth-child(2) { min-width: 120px; }  /* Naar winkel */
+.personeel-table th:nth-child(3),
+.personeel-table td:nth-child(3) { min-width: 200px; }  /* Naam */
+.personeel-table th:nth-child(4),
+.personeel-table td:nth-child(4) { min-width: 80px;  }  /* Uren */
+.personeel-table th:nth-child(5),
+.personeel-table td:nth-child(5) { min-width: 120px; }  /* Datum */
+.personeel-table th:nth-child(6),
+.personeel-table td:nth-child(6) { min-width: 140px; }  /* Ingevuld door */
+.personeel-table th:nth-child(7),
+.personeel-table td:nth-child(7) { min-width: 100px; }  /* Acties */
+
+/* Verwijderen-knop in tabel (zelfde als VoorraadPage) */
+.personeel-table button {
+  background-color: #e21b24;   /* Domino’s rood */
+  color: white;
+  border: none;
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background-color 0.2s ease;
+}
+
+.personeel-table button:hover {
+  background-color: #c8161d;   /* donkerder rood bij hover */
+}
+
+/* Mobiel */
 @media (max-width: 768px) {
   .personeel-table thead th {
     position: static !important;

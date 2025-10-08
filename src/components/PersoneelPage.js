@@ -1,17 +1,17 @@
 // src/components/PersoneelPage.js
 import React, { useState, useEffect } from "react";
-import "./PersoneelPage.css";
 import { db } from "../firebase";
 import {
   collection,
   addDoc,
+  serverTimestamp,
+  onSnapshot,
+  query,
+  orderBy,
   deleteDoc,
   doc,
-  onSnapshot,
-  orderBy,
-  query,
-  serverTimestamp,
 } from "firebase/firestore";
+import "./PersoneelPage.css";
 
 export default function PersoneelPage({ user }) {
   const stores = ["Nieuwerkerk", "Krimpen", "Capelle", "Zevenkamp"];
@@ -37,19 +37,18 @@ export default function PersoneelPage({ user }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!fromStore || !toStore || !name || !hours || !date) {
-      alert("Vul alle velden in!");
-      return;
-    }
+    if (!fromStore || !toStore || !name || !hours || !date) return;
+
     await addDoc(collection(db, "personeel"), {
       fromStore,
       toStore,
       name,
       hours: parseFloat(hours),
       date,
-      user: user?.name || "Onbekend",
+      user: user?.name || "Onbekend", // zelfde als in VoorraadPage
       createdAt: serverTimestamp(),
     });
+
     setFromStore("");
     setToStore("");
     setName("");
@@ -65,27 +64,20 @@ export default function PersoneelPage({ user }) {
     <div className="personeel-container">
       <div className="personeel-box">
         <h2>Personeelbeheer</h2>
-
-        {/* Formulier */}
         <form className="personeel-form" onSubmit={handleSubmit}>
           <select value={fromStore} onChange={(e) => setFromStore(e.target.value)}>
             <option value="">Van winkel</option>
-            {stores.map((s) => (
-              <option key={s} value={s}>{s}</option>
-            ))}
+            {stores.map((s) => <option key={s} value={s}>{s}</option>)}
           </select>
           <select value={toStore} onChange={(e) => setToStore(e.target.value)}>
             <option value="">Naar winkel</option>
-            {stores.map((s) => (
-              <option key={s} value={s}>{s}</option>
-            ))}
+            {stores.map((s) => <option key={s} value={s}>{s}</option>)}
           </select>
           <input
             type="text"
             placeholder="Naam medewerker"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            style={{ minWidth: 180 }}
           />
           <input
             type="number"
@@ -101,7 +93,6 @@ export default function PersoneelPage({ user }) {
           <button type="submit">Opslaan</button>
         </form>
 
-        {/* Tabel */}
         <div className="table-responsive">
           <table className="personeel-table">
             <thead>
@@ -117,19 +108,17 @@ export default function PersoneelPage({ user }) {
             </thead>
             <tbody>
               {entries.length === 0 ? (
-                <tr>
-                  <td colSpan="7">Nog geen gegevens ingevoerd.</td>
-                </tr>
+                <tr><td colSpan="7">Nog geen gegevens ingevoerd.</td></tr>
               ) : (
                 entries.map((entry) => (
                   <tr key={entry.id}>
-                    <td>{entry.fromStore}</td>
-                    <td>{entry.toStore}</td>
-                    <td>{entry.name}</td>
-                    <td>{entry.hours}</td>
-                    <td>{entry.date}</td>
-                    <td>{entry.user}</td>
-                    <td>
+                    <td data-label="Van winkel">{entry.fromStore}</td>
+                    <td data-label="Naar winkel">{entry.toStore}</td>
+                    <td data-label="Naam">{entry.name}</td>
+                    <td data-label="Uren">{entry.hours}</td>
+                    <td data-label="Datum">{entry.date}</td>
+                    <td data-label="Ingevuld door">{entry.user}</td>
+                    <td data-label="Acties">
                       <button onClick={() => handleDelete(entry.id)}>Verwijderen</button>
                     </td>
                   </tr>

@@ -190,20 +190,20 @@ export default function VoorraadPage({ user }) {
               ) : (
                 entries.map((entry) => (
                   <tr key={entry.id}>
-                    <td>{entry.fromStore}</td>
-                    <td>{entry.toStore}</td>
-                    <td>{entry.item}</td>
-                    <td>{entry.quantity}</td>
-                    <td>{entry.unit}</td>
-                    <td>{entry.user}</td>
-                    <td>
+                    <td data-label="Uitgeleend van">{entry.fromStore}</td>
+                    <td data-label="Aan">{entry.toStore}</td>
+                    <td data-label="Item">{entry.item}</td>
+                    <td data-label="Aantal">{entry.quantity}</td>
+                    <td data-label="Eenheid">{entry.unit}</td>
+                    <td data-label="Door">{entry.user}</td>
+                    <td data-label="Teruggebracht?">
                       <input
                         type="checkbox"
                         checked={entry.returned}
                         onChange={() => toggleReturned(entry)}
                       />
                     </td>
-                    <td>
+                    <td data-label="Acties">
                       <button onClick={() => handleDelete(entry.id)}>Verwijderen</button>
                     </td>
                   </tr>

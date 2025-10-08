@@ -1,97 +1,164 @@
-/* src/components/VoorraadPage.css */
-
-/* Container */
+/* Container en box */
 .voorraad-container {
-  width: 100%;
   display: flex;
   justify-content: center;
-  padding: 1rem;
+  padding: 2rem;
 }
 
-/* Box */
 .voorraad-box {
-  background: #fff;
-  border-radius: 8px;
-  padding: 1.5rem;
-  width: 100%;
+  margin: 0 auto;
   max-width: 1100px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 1.5rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
+/* Titel */
 .voorraad-box h2 {
-  margin: 0 0 14px 0;
   text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+  font-weight: bold;
   color: #333;
 }
 
-/* Form */
+/* Formulier */
 .voorraad-form {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
+  gap: 0.6rem;
+  justify-content: center;
+  align-items: center;   /* alles in één lijn */
+  margin-bottom: 1.5rem;
 }
 
 .voorraad-form select,
-.voorraad-form input,
-.voorraad-form button {
-  padding: 0.5rem;
-  border-radius: 4px;
+.voorraad-form input {
+  padding: 0.4rem;
   border: 1px solid #ccc;
+  border-radius: 4px;
   font-size: 0.9rem;
+  height: 38px;          /* gelijke hoogte */
 }
 
 .voorraad-form button {
-  background-color: #ef4444;
+  background-color: #e21b24; /* Domino’s rood */
   color: white;
-  cursor: pointer;
   border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+  height: 38px;          /* zelfde hoogte als inputs */
+  display: flex;
+  align-items: center;
 }
 
 .voorraad-form button:hover {
-  background-color: #dc2626;
+  background-color: #c8161d;
 }
 
-/* Responsive tabel */
+/* Tabel styling */
 .table-responsive {
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 .voorraad-table {
   width: 100%;
   border-collapse: collapse;
-  table-layout: fixed;
 }
 
-.voorraad-table th,
+.voorraad-table th {
+  background-color: #0066b3; /* mooi blauw */
+  color: white;
+  font-weight: bold;
+  padding: 0.6rem;
+  text-align: left;
+}
+
 .voorraad-table td {
   border: 1px solid #ddd;
   padding: 0.5rem;
-  text-align: left;
-  word-break: break-word;
 }
 
-/* Kolommen beter verdelen */
-.voorraad-table th:nth-child(1),
-.voorraad-table td:nth-child(1) { min-width: 120px; }
-.voorraad-table th:nth-child(2),
-.voorraad-table td:nth-child(2) { min-width: 120px; }
-.voorraad-table th:nth-child(3),
-.voorraad-table td:nth-child(3) { min-width: 200px; }
-.voorraad-table th:nth-child(4),
-.voorraad-table td:nth-child(4) { min-width: 80px; }
-.voorraad-table th:nth-child(5),
-.voorraad-table td:nth-child(5) { min-width: 90px; }
-.voorraad-table th:nth-child(6),
-.voorraad-table td:nth-child(6) { min-width: 110px; }
-.voorraad-table th:nth-child(7),
-.voorraad-table td:nth-child(7) { min-width: 140px; }
-.voorraad-table th:nth-child(8),
-.voorraad-table td:nth-child(8) { min-width: 100px; }
+.voorraad-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
 
+/* Buttons in tabel */
+.voorraad-table button {
+  background-color: #e21b24;
+  color: white;
+  border: none;
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.voorraad-table button:hover {
+  background-color: #c8161d;
+}
+
+/* Checkbox centreren */
+.voorraad-table input[type="checkbox"] {
+  transform: scale(1.2);
+}
+
+/* Mobiel weergave: kaartstijl */
 @media (max-width: 768px) {
-  .voorraad-table thead th {
-    position: static !important;
+  .voorraad-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .voorraad-form button {
+    width: 100%; /* knop op volle breedte op mobiel */
+  }
+
+  .voorraad-table,
+  .voorraad-table thead,
+  .voorraad-table tbody,
+  .voorraad-table th,
+  .voorraad-table td,
+  .voorraad-table tr {
+    display: block;
+    width: 100%;
+  }
+
+  .voorraad-table thead {
+    display: none;
+  }
+
+  .voorraad-table tr {
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #fff;
+    padding: 0.6rem;
+  }
+
+  .voorraad-table td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+    border: none;
+    border-bottom: 1px solid #eee;
+  }
+
+  .voorraad-table td:last-child {
+    border-bottom: none;
+  }
+
+  .voorraad-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 0.6rem;
+    font-weight: bold;
+    text-align: left;
   }
 }
