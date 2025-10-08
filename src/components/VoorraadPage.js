@@ -9,8 +9,6 @@ import {
   deleteDoc,
   doc,
   onSnapshot,
-  orderBy,
-  query,
   updateDoc,
   serverTimestamp,
 } from "firebase/firestore";
@@ -54,7 +52,7 @@ export default function VoorraadPage({ user }) {
   const [toStore, setToStore] = useState("");
   const [item, setItem] = useState("");
   const [quantity, setQuantity] = useState("");
-  const [unit, setUnit] = useState("");   
+  const [unit, setUnit] = useState("");
   const [search, setSearch] = useState("");
   const [entries, setEntries] = useState([]);
 
@@ -78,14 +76,22 @@ export default function VoorraadPage({ user }) {
       .filter((g) => g.items.length > 0);
   }, [cleanGroups, search]);
 
+  // ✅ Ophalen en lokaal sorteren zodat oude data ook zichtbaar blijft
   useEffect(() => {
     const voorraadRef = collection(db, "voorraad");
-    const q = query(voorraadRef, orderBy("createdAt", "desc"));
-    const unsub = onSnapshot(q, (snapshot) => {
+    const unsub = onSnapshot(voorraadRef, (snapshot) => {
       const data = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
+
+      data.sort((a, b) => {
+        if (!a.createdAt && !b.createdAt) return 0;
+        if (!a.createdAt) return 1;
+        if (!b.createdAt) return -1;
+        return b.createdAt.seconds - a.createdAt.seconds;
+      });
+
       setEntries(data);
     });
     return () => unsub();

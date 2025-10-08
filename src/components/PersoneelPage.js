@@ -6,8 +6,6 @@ import {
   addDoc,
   serverTimestamp,
   onSnapshot,
-  query,
-  orderBy,
   deleteDoc,
   doc,
 } from "firebase/firestore";
@@ -24,12 +22,20 @@ export default function PersoneelPage({ user }) {
 
   useEffect(() => {
     const personeelRef = collection(db, "personeel");
-    const q = query(personeelRef, orderBy("createdAt", "desc"));
-    const unsub = onSnapshot(q, (snapshot) => {
+    const unsub = onSnapshot(personeelRef, (snapshot) => {
       const data = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
+
+      // Sorteer lokaal: nieuwe entries eerst, oude blijven zichtbaar
+      data.sort((a, b) => {
+        if (!a.createdAt && !b.createdAt) return 0;
+        if (!a.createdAt) return 1;   // zet oude (zonder createdAt) onderaan
+        if (!b.createdAt) return -1;
+        return b.createdAt.seconds - a.createdAt.seconds;
+      });
+
       setEntries(data);
     });
     return () => unsub();
