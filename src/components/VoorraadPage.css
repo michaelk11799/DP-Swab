@@ -93,6 +93,12 @@
 
 /* ✅ Mobile fix */
 @media (max-width: 600px) {
+  .voorraad-box {
+    width: 95% !important;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+
   .voorraad-form {
     flex-direction: column;
     align-items: stretch;
@@ -102,8 +108,8 @@
   .voorraad-form select,
   .voorraad-form input,
   .voorraad-form button {
-    width: 100% !important;
-    max-width: 100% !important;
+    width: 95% !important;
+    margin: 0 auto !important;
     box-sizing: border-box;
   }
 
@@ -121,12 +127,11 @@
   .voorraad-table thead { display: none; }
 
   .voorraad-table tr {
-    width: 90% !important;      /* 🔹 10% smaller */
-    margin: 0 auto !important;  /* 🔹 centraal */
-    margin-bottom: 0.6rem;
+    width: 90% !important;
+    margin: 0 auto 0.6rem auto !important;
     border: 1px solid #ddd;
     border-radius: 4px;
-    padding: 0.3rem;
+    padding: 0.6rem;
     box-shadow: 0 1px 2px rgba(0,0,0,0.08);
     background: #fff;
   }
@@ -149,6 +154,4 @@
     margin-right: 0.3rem;
     flex-shrink: 0;
   }
-
-  .voorraad-box { padding: 1rem; }
 }
