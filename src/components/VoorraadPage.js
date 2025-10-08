@@ -1,5 +1,5 @@
 // src/components/VoorraadPage.js
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect, useRef } from "react";
 import rawGroups from "../data/items";
 import "./VoorraadPage.css";
 import { db } from "../firebase";
@@ -9,6 +9,8 @@ import {
   deleteDoc,
   doc,
   onSnapshot,
+  orderBy,
+  query,
   updateDoc,
   serverTimestamp,
 } from "firebase/firestore";
@@ -47,6 +49,8 @@ function buildCleanGroups(groups) {
 }
 
 export default function VoorraadPage({ user }) {
+  const scrollerRef = useRef(null);
+
   const stores = ["Nieuwerkerk", "Krimpen", "Capelle", "Zevenkamp"];
   const [fromStore, setFromStore] = useState("");
   const [toStore, setToStore] = useState("");
@@ -76,26 +80,23 @@ export default function VoorraadPage({ user }) {
       .filter((g) => g.items.length > 0);
   }, [cleanGroups, search]);
 
-  // ✅ Ophalen en lokaal sorteren zodat oude data ook zichtbaar blijft
   useEffect(() => {
     const voorraadRef = collection(db, "voorraad");
-    const unsub = onSnapshot(voorraadRef, (snapshot) => {
+    const q = query(voorraadRef, orderBy("createdAt", "desc"));
+    const unsub = onSnapshot(q, (snapshot) => {
       const data = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-
-      data.sort((a, b) => {
-        if (!a.createdAt && !b.createdAt) return 0;
-        if (!a.createdAt) return 1;
-        if (!b.createdAt) return -1;
-        return b.createdAt.seconds - a.createdAt.seconds;
-      });
-
       setEntries(data);
     });
     return () => unsub();
   }, []);
+
+  // Fix iOS Safari: make sure the scroller starts fully left
+  useEffect(() => {
+    if (scrollerRef.current) scrollerRef.current.scrollLeft = 0;
+  }, [entries.length]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -119,6 +120,7 @@ export default function VoorraadPage({ user }) {
     setQuantity("");
     setUnit("");
     setSearch("");
+    if (scrollerRef.current) scrollerRef.current.scrollLeft = 0;
   };
 
   const handleDelete = async (id) => {
@@ -136,7 +138,6 @@ export default function VoorraadPage({ user }) {
       <div className="voorraad-box">
         <h2>Voorraadbeheer</h2>
 
-        {/* Formulier */}
         <form className="voorraad-form" onSubmit={handleSubmit}>
           <select value={fromStore} onChange={(e) => setFromStore(e.target.value)}>
             <option value="">Van winkel</option>
@@ -175,8 +176,12 @@ export default function VoorraadPage({ user }) {
           <button type="submit">Opslaan</button>
         </form>
 
-        {/* Tabel */}
-        <div className="table-responsive">
+        <div
+          className="table-responsive"
+          ref={scrollerRef}
+          dir="ltr"
+          aria-label="Scroll horizontaal om alle kolommen te zien"
+        >
           <table className="voorraad-table">
             <thead>
               <tr>

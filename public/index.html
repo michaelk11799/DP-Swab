@@ -1,25 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
   <head>
     <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <!-- Favicon voor browsers -->
-    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon.png" />
-
-    <!-- Apple touch icon (voor iOS en iPadOS) -->
-    <link rel="apple-touch-icon" sizes="192x192" href="%PUBLIC_URL%/apple-touch-icon.png" />
-
-    <!-- Manifest voor PWA -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+    <!-- Viewport: belangrijk voor iOS notch en correcte zoom -->
     <meta
-      name="description"
-      content="DP Swap - Beheer van het uitlenen en terugbrengen van ingrediënten en personeel"
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
 
+    <!-- PWA / icons -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png" />
+
+    <!-- Web app-capable (iOS/Android) -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <!-- Thema-kleur (licht/donker vriendelijk) -->
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="description" content="DP Swap - Beheer van het uitlenen en terugbrengen van ingrediënten en personeel" />
+
+    <!-- Voorkom dat iOS telefoonnummers/gegevens auto-linkt -->
+    <meta name="format-detection" content="telephone=no, date=no, email=no, address=no" />
+
     <title>DP Swap</title>
+
+    <!-- Kleine, veilige CSS-hulpjes voor mobiel scroll-gedrag -->
+    <style>
+      /* Geen horizontale body-scroll; component-wrappers regelen hun eigen scroll. */
+      html, body { overflow-x: hidden; }
+      /* Soepele momentum scroll in horizontale wrappers op iOS (fallback class). */
+      .allow-x-scroll { -webkit-overflow-scrolling: touch; }
+    </style>
   </head>
   <body>
     <noscript>Je moet JavaScript inschakelen om deze app te gebruiken.</noscript>

@@ -6,6 +6,8 @@ import {
   addDoc,
   serverTimestamp,
   onSnapshot,
+  query,
+  orderBy,
   deleteDoc,
   doc,
 } from "firebase/firestore";
@@ -13,6 +15,7 @@ import "./PersoneelPage.css";
 
 export default function PersoneelPage({ user }) {
   const stores = ["Nieuwerkerk", "Krimpen", "Capelle", "Zevenkamp"];
+
   const [fromStore, setFromStore] = useState("");
   const [toStore, setToStore] = useState("");
   const [name, setName] = useState("");
@@ -22,21 +25,9 @@ export default function PersoneelPage({ user }) {
 
   useEffect(() => {
     const personeelRef = collection(db, "personeel");
-    const unsub = onSnapshot(personeelRef, (snapshot) => {
-      const data = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-
-      // Sorteer lokaal: nieuwe entries eerst, oude blijven zichtbaar
-      data.sort((a, b) => {
-        if (!a.createdAt && !b.createdAt) return 0;
-        if (!a.createdAt) return 1;   // zet oude (zonder createdAt) onderaan
-        if (!b.createdAt) return -1;
-        return b.createdAt.seconds - a.createdAt.seconds;
-      });
-
-      setEntries(data);
+    const q = query(personeelRef, orderBy("createdAt", "desc"));
+    const unsub = onSnapshot(q, (snap) => {
+      setEntries(snap.docs.map((d) => ({ id: d.id, ...d.data() })));
     });
     return () => unsub();
   }, []);
@@ -71,15 +62,18 @@ export default function PersoneelPage({ user }) {
       <div className="personeel-box">
         <h2>Personeelbeheer</h2>
 
-        {/* Formulier */}
         <form className="personeel-form" onSubmit={handleSubmit}>
           <select value={fromStore} onChange={(e) => setFromStore(e.target.value)}>
             <option value="">Van winkel</option>
-            {stores.map((s) => <option key={s} value={s}>{s}</option>)}
+            {stores.map((s) => (
+              <option key={s} value={s}>{s}</option>
+            ))}
           </select>
           <select value={toStore} onChange={(e) => setToStore(e.target.value)}>
             <option value="">Naar winkel</option>
-            {stores.map((s) => <option key={s} value={s}>{s}</option>)}
+            {stores.map((s) => (
+              <option key={s} value={s}>{s}</option>
+            ))}
           </select>
           <input
             type="text"
@@ -101,7 +95,6 @@ export default function PersoneelPage({ user }) {
           <button type="submit">Opslaan</button>
         </form>
 
-        {/* Scrollbare tabel */}
         <div className="table-responsive">
           <table className="personeel-table">
             <thead>
@@ -121,13 +114,13 @@ export default function PersoneelPage({ user }) {
               ) : (
                 entries.map((entry) => (
                   <tr key={entry.id}>
-                    <td>{entry.fromStore}</td>
-                    <td>{entry.toStore}</td>
-                    <td>{entry.name}</td>
-                    <td>{entry.hours}</td>
-                    <td>{entry.date}</td>
-                    <td>{entry.user}</td>
-                    <td>
+                    <td data-label="Van winkel">{entry.fromStore}</td>
+                    <td data-label="Naar winkel">{entry.toStore}</td>
+                    <td data-label="Naam">{entry.name}</td>
+                    <td data-label="Uren">{entry.hours}</td>
+                    <td data-label="Datum">{entry.date}</td>
+                    <td data-label="Ingevuld door">{entry.user}</td>
+                    <td data-label="Acties">
                       <button onClick={() => handleDelete(entry.id)}>Verwijderen</button>
                     </td>
                   </tr>
