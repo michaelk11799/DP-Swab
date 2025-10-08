@@ -1,4 +1,3 @@
-/* Container */
 .voorraad-container {
   width: 100%;
   display: flex;
@@ -8,7 +7,6 @@
   box-sizing: border-box;
 }
 
-/* Box */
 .voorraad-box {
   background: #fff;
   border-radius: 8px;
@@ -25,7 +23,6 @@
   color: #333;
 }
 
-/* Formulier */
 .voorraad-form {
   display: flex;
   flex-wrap: wrap;
@@ -53,7 +50,6 @@
 }
 .voorraad-form button:hover { background-color: #dc2626; }
 
-/* Scrollbare tabel wrapper */
 .table-responsive {
   width: 100%;
   overflow-x: auto;
@@ -63,11 +59,10 @@
   margin: 0 auto;
 }
 
-/* Desktop tabel */
 .voorraad-table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 850px; /* desktop: forceer scroll bij smalle schermen */
+  min-width: 850px;
 }
 
 .voorraad-table th,
@@ -96,13 +91,8 @@
 }
 .voorraad-table button:hover { background-color: #c62828; }
 
-/* ✅ Mobile card-stijl + formulier fix */
+/* ✅ Mobile fix */
 @media (max-width: 600px) {
-  .voorraad-container {
-    padding: 0.8rem;
-  }
-
-  /* Formulier onder elkaar en 100% breed */
   .voorraad-form {
     flex-direction: column;
     align-items: stretch;
@@ -117,7 +107,6 @@
     box-sizing: border-box;
   }
 
-  /* 🔹 Tabel volledig blok-weergave */
   .voorraad-table,
   .voorraad-table thead,
   .voorraad-table tbody,
@@ -126,13 +115,15 @@
   .voorraad-table tr {
     display: block;
     width: 100% !important;
-    min-width: unset !important;  /* haalt de desktop min-width weg */
+    min-width: unset !important;
   }
 
   .voorraad-table thead { display: none; }
 
   .voorraad-table tr {
-    margin: 0 0 0.6rem 0;
+    width: 90% !important;      /* 🔹 10% smaller */
+    margin: 0 auto !important;  /* 🔹 centraal */
+    margin-bottom: 0.6rem;
     border: 1px solid #ddd;
     border-radius: 4px;
     padding: 0.3rem;
