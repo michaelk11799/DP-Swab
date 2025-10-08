@@ -6,6 +6,8 @@
   display: flex;
   justify-content: center;
   padding: 1rem;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 /* Box */
@@ -51,7 +53,7 @@
 }
 .voorraad-form button:hover { background-color: #dc2626; }
 
-/* Tabel wrapper */
+/* Scrollbare tabel wrapper */
 .table-responsive {
   width: 100%;
   overflow-x: auto;
@@ -65,7 +67,7 @@
 .voorraad-table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 850px;   /* hetzelfde als personeelpage */
+  min-width: 850px; /* desktop: forceer scroll bij smalle schermen */
 }
 
 .voorraad-table th,
@@ -94,12 +96,13 @@
 }
 .voorraad-table button:hover { background-color: #c62828; }
 
-/* ✅ Mobile card-stijl – identiek aan PersoneelPage */
+/* ✅ Mobile card-stijl */
 @media (max-width: 600px) {
   .voorraad-container {
     padding: 0.8rem;
   }
 
+  /* 🔹 Tabel volledig blok-weergave */
   .voorraad-table,
   .voorraad-table thead,
   .voorraad-table tbody,
@@ -107,10 +110,13 @@
   .voorraad-table td,
   .voorraad-table tr {
     display: block;
-    width: 100%;
+    width: 100% !important;
+    min-width: unset !important;  /* 🔥 haalt de desktop min-width weg */
   }
 
-  .voorraad-table thead { display: none; }
+  .voorraad-table thead {
+    display: none;
+  }
 
   .voorraad-table tr {
     margin: 0 0 0.6rem 0;
