@@ -97,27 +97,41 @@
   background-color: #c62828;
 }
 
-/* ✅ Mobile horizontale scroll */
+/* ========== Mobile friendly tabel (VoorraadPage) ========== */
 @media (max-width: 600px) {
-  .table-responsive {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    margin: 0;
-    padding: 0;
+  .voorraad-table,
+  .voorraad-table thead,
+  .voorraad-table tbody,
+  .voorraad-table th,
+  .voorraad-table td,
+  .voorraad-table tr {
+    display: block;
     width: 100%;
   }
 
-  .voorraad-table {
-    min-width: 700px; /* zodat je kan scrollen */
-    font-size: 0.8rem;
+  .voorraad-table thead { display: none; }
+
+  .voorraad-table tr {
+    margin-bottom: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    padding: 0.5rem;
   }
 
-  .voorraad-table th,
   .voorraad-table td {
-    padding: 0.35rem;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.3rem 0.4rem;
+    border: none;
+    font-size: 0.85rem;
   }
 
-  .voorraad-box {
-    padding: 0.8rem;
+  .voorraad-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #0066b3;
+    margin-right: 0.5rem;
   }
 }

@@ -68,7 +68,7 @@
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
-  min-width: 800px; /* forceer scroll bij smalle schermen */
+  min-width: 800px; 
 }
 
 .admin-table th,
@@ -81,7 +81,7 @@
 
 /* Header styling */
 .admin-table thead th {
-  background-color: #0066b3; /* zelfde blauw als Voorraad/Personeel */
+  background-color: #0066b3;
   color: #fff;
   font-weight: 600;
   font-size: 0.9rem;
@@ -101,4 +101,43 @@
 
 .admin-table button:hover {
   background-color: #c8161d;
+}
+
+/* ========== Mobile friendly tabel (AdminPage) ========== */
+@media (max-width: 600px) {
+  .admin-table,
+  .admin-table thead,
+  .admin-table tbody,
+  .admin-table th,
+  .admin-table td,
+  .admin-table tr {
+    display: block;
+    width: 100%;
+  }
+
+  .admin-table thead { display: none; }
+
+  .admin-table tr {
+    margin-bottom: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    padding: 0.5rem;
+  }
+
+  .admin-table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.3rem 0.4rem;
+    border: none;
+    font-size: 0.85rem;
+  }
+
+  .admin-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #0066b3;
+    margin-right: 0.5rem;
+  }
 }

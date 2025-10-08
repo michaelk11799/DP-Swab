@@ -25,7 +25,7 @@ body {
 
 /* ========== Centrale layout voor alle pagina’s ========== */
 .app-main {
-  min-height: 100vh;           /* schermhoogte */
+  min-height: 100vh;           
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,10 +48,10 @@ body {
 .dashboard-box {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: saturate(120%) blur(0px);
-  padding: 24px;                 /* 🔥 iets minder padding */
+  padding: 24px;                 
   border-radius: 12px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
-  max-width: 400px;              /* 🔥 box minder breed */
+  max-width: 400px;              
   width: 100%;
   text-align: center;
 }
@@ -63,15 +63,15 @@ body {
   padding: 24px;
   border-radius: 12px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-  width: clamp(320px, 90vw, 1000px);  /* mag wat breder blijven */
-  margin-top: 24px;                   /* ruimte boven box */
+  width: clamp(320px, 90vw, 1000px);  
+  margin-top: 24px;                   
 }
 
 /* Zorg dat dashboard-logo kleiner blijft */
 .dashboard-logo {
   display: block;
   margin: 0 auto 16px;
-  width: 180px;   /* 🔥 groter logo */
+  width: 180px;  
 }
 
 /* ========== Login box (compact en gecentreerd) ========== */
@@ -86,7 +86,7 @@ body {
 
   display: flex;
   flex-direction: column;
-  align-items: center;   /* alles in het midden */
+  align-items: center;   
   text-align: center;
 }
 
@@ -195,4 +195,36 @@ body {
 .voorraad-table th {
   background: var(--dom-blue);
   color: #fff;
+}
+
+/* ========== Mobile optimalisatie algemeen ========== */
+@media (max-width: 600px) {
+  .page-container {
+    flex-direction: column; 
+    gap: 20px;
+    padding: 12px;
+  }
+
+  .dashboard-box,
+  .voorraad-box,
+  .login-box {
+    max-width: 100%;
+    margin: 0;
+    padding: 16px;
+  }
+
+  .login-form input,
+  .login-form button {
+    width: 100%;
+  }
+
+  .nav-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav-btn {
+    padding: 12px;
+    font-size: 1rem;
+  }
 }
