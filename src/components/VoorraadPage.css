@@ -100,9 +100,10 @@
   }
 
   .voorraad-box {
-    margin: 0 auto !important;
-    width: 95% !important;   /* 🔥 iets smaller zodat hij optisch perfect gecentreerd staat */
-    max-width: 95% !important;
+    margin-left: auto;
+    margin-right: auto;
+    width: 98% !important;   /* 🔥 net iets breder zodat hij perfect centraal oogt */
+    max-width: 98% !important;
     padding: 1rem !important;
   }
 
