@@ -42,7 +42,7 @@
 }
 
 .personeel-form button {
-  background-color: #e21b24;
+  background-color: #ef4444;
   color: white;
   cursor: pointer;
   border: none;
@@ -52,19 +52,21 @@
   background-color: #dc2626;
 }
 
-/* Responsive tabel */
+/* Tabel container → zorgt voor scrollen */
 .table-responsive {
+  width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
 
+/* Tabel */
 .personeel-table {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
+  min-width: 900px; /* forceer breedte zodat er gescrold kan worden */
 }
 
-/* Zelfde styling als voorraad-table */
 .personeel-table th,
 .personeel-table td {
   border: 1px solid #ddd;
@@ -73,33 +75,33 @@
   word-break: break-word;
 }
 
-/* Header kleur (zelfde blauw/wit als voorraad) */
+/* Header kleur (zelfde blauw/wit als VoorraadPage) */
 .personeel-table thead th {
-  background-color: #0066b3; /* exact zelfde donkerblauw als VoorraadPage */
+  background-color: #0066b3;
   color: #fff;
   font-weight: 600;
-  font-size: 0.9rem;  /* zelfde als VoorraadPage */
+  font-size: 0.9rem;
 }
 
-/* Kolombreedtes (7 kolommen) */
+/* Kolombreedtes */
 .personeel-table th:nth-child(1),
-.personeel-table td:nth-child(1) { min-width: 120px; }  /* Van winkel */
+.personeel-table td:nth-child(1) { min-width: 120px; }
 .personeel-table th:nth-child(2),
-.personeel-table td:nth-child(2) { min-width: 120px; }  /* Naar winkel */
+.personeel-table td:nth-child(2) { min-width: 120px; }
 .personeel-table th:nth-child(3),
-.personeel-table td:nth-child(3) { min-width: 200px; }  /* Naam */
+.personeel-table td:nth-child(3) { min-width: 200px; }
 .personeel-table th:nth-child(4),
-.personeel-table td:nth-child(4) { min-width: 80px;  }  /* Uren */
+.personeel-table td:nth-child(4) { min-width: 80px;  }
 .personeel-table th:nth-child(5),
-.personeel-table td:nth-child(5) { min-width: 120px; }  /* Datum */
+.personeel-table td:nth-child(5) { min-width: 120px; }
 .personeel-table th:nth-child(6),
-.personeel-table td:nth-child(6) { min-width: 140px; }  /* Ingevuld door */
+.personeel-table td:nth-child(6) { min-width: 140px; }
 .personeel-table th:nth-child(7),
-.personeel-table td:nth-child(7) { min-width: 100px; }  /* Acties */
+.personeel-table td:nth-child(7) { min-width: 100px; }
 
-/* Verwijderen-knop in tabel (zelfde als VoorraadPage) */
+/* Verwijderknop */
 .personeel-table button {
-  background-color: #e21b24;   /* Domino’s rood */
+  background-color: #e21b24;
   color: white;
   border: none;
   padding: 0.3rem 0.7rem;
@@ -110,12 +112,5 @@
 }
 
 .personeel-table button:hover {
-  background-color: #c8161d;   /* donkerder rood bij hover */
-}
-
-/* Mobiel */
-@media (max-width: 768px) {
-  .personeel-table thead th {
-    position: static !important;
-  }
+  background-color: #c8161d;
 }
