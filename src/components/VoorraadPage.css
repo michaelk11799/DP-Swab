@@ -1,3 +1,6 @@
+/* src/components/VoorraadPage.css */
+
+/* Container */
 .voorraad-container {
   width: 100%;
   display: flex;
@@ -7,6 +10,7 @@
   box-sizing: border-box;
 }
 
+/* Box */
 .voorraad-box {
   background: #fff;
   border-radius: 8px;
@@ -24,6 +28,7 @@
   color: #333;
 }
 
+/* Formulier */
 .voorraad-form {
   display: flex;
   flex-wrap: wrap;
@@ -51,17 +56,21 @@
 }
 .voorraad-form button:hover { background-color: #dc2626; }
 
+/* Scrollbare tabel wrapper */
 .table-responsive {
   width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
-  overflow-x: hidden; /* horizontale scroll weg */
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
+/* Desktop tabel */
 .voorraad-table {
   width: 100%;
   border-collapse: collapse;
   margin: 0 auto;
+  min-width: 700px;
 }
 
 .voorraad-table th,
@@ -90,21 +99,17 @@
 }
 .voorraad-table button:hover { background-color: #c62828; }
 
-/* 🔹 Mobile card-stijl + fine-tune centrering */
+/* ✅ Mobile card-stijl */
 @media (max-width: 600px) {
   .voorraad-container {
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto !important;
-    width: 100% !important;
+    padding: 0.5rem;
   }
 
   .voorraad-box {
-    margin-left: auto;
-    margin-right: auto;
-    width: 98% !important;   /* 🔥 net iets breder zodat hij perfect centraal oogt */
-    max-width: 98% !important;
-    padding: 1rem !important;
+    width: calc(100% - 16px); /* 🔹 gelijke ruimte links/rechts */
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
   }
 
   .voorraad-table,
@@ -118,7 +123,9 @@
     min-width: unset !important;
   }
 
-  .voorraad-table thead { display: none; }
+  .voorraad-table thead {
+    display: none;
+  }
 
   .voorraad-table tr {
     margin-bottom: 0.75rem;
