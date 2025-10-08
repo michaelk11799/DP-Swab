@@ -45,7 +45,7 @@ export default function PersoneelPage({ user }) {
       name,
       hours: parseFloat(hours),
       date,
-      user: user?.name || "Onbekend", // zelfde als in VoorraadPage
+      user: user?.name || "Onbekend",
       createdAt: serverTimestamp(),
     });
 
@@ -64,6 +64,8 @@ export default function PersoneelPage({ user }) {
     <div className="personeel-container">
       <div className="personeel-box">
         <h2>Personeelbeheer</h2>
+
+        {/* Formulier */}
         <form className="personeel-form" onSubmit={handleSubmit}>
           <select value={fromStore} onChange={(e) => setFromStore(e.target.value)}>
             <option value="">Van winkel</option>
@@ -93,6 +95,7 @@ export default function PersoneelPage({ user }) {
           <button type="submit">Opslaan</button>
         </form>
 
+        {/* Scrollbare tabel */}
         <div className="table-responsive">
           <table className="personeel-table">
             <thead>
@@ -112,13 +115,13 @@ export default function PersoneelPage({ user }) {
               ) : (
                 entries.map((entry) => (
                   <tr key={entry.id}>
-                    <td data-label="Van winkel">{entry.fromStore}</td>
-                    <td data-label="Naar winkel">{entry.toStore}</td>
-                    <td data-label="Naam">{entry.name}</td>
-                    <td data-label="Uren">{entry.hours}</td>
-                    <td data-label="Datum">{entry.date}</td>
-                    <td data-label="Ingevuld door">{entry.user}</td>
-                    <td data-label="Acties">
+                    <td>{entry.fromStore}</td>
+                    <td>{entry.toStore}</td>
+                    <td>{entry.name}</td>
+                    <td>{entry.hours}</td>
+                    <td>{entry.date}</td>
+                    <td>{entry.user}</td>
+                    <td>
                       <button onClick={() => handleDelete(entry.id)}>Verwijderen</button>
                     </td>
                   </tr>

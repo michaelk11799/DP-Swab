@@ -22,15 +22,18 @@
   margin: 0 0 14px 0;
   text-align: center;
   color: #333;
+  font-size: 1.4rem;
+  font-weight: bold;
 }
 
-/* Form */
+/* Formulier */
 .voorraad-form {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-bottom: 1rem;
   justify-content: center;
+  align-items: center;
 }
 
 .voorraad-form select,
@@ -47,13 +50,18 @@
   color: white;
   cursor: pointer;
   border: none;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  transition: background-color 0.2s ease;
 }
 
 .voorraad-form button:hover {
   background-color: #dc2626;
 }
 
-/* Tabel container → zorgt voor scrollen */
+/* Scrollbare tabel wrapper */
 .table-responsive {
   width: 100%;
   overflow-x: auto;
@@ -65,7 +73,7 @@
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
-  min-width: 1000px; /* forceer breedte zodat er gescrold kan worden */
+  min-width: 1000px; /* forceer breedte zodat scroll verschijnt */
 }
 
 .voorraad-table th,
@@ -76,9 +84,9 @@
   word-break: break-word;
 }
 
-/* Header kleur */
+/* Header styling */
 .voorraad-table thead th {
-  background-color: #0066b3;
+  background-color: #0066b3; /* zelfde blauw als PersoneelPage */
   color: #fff;
   font-weight: 600;
   font-size: 0.9rem;
@@ -98,9 +106,17 @@
 .voorraad-table th:nth-child(6),
 .voorraad-table td:nth-child(6) { min-width: 140px; }
 .voorraad-table th:nth-child(7),
-.voorraad-table td:nth-child(7) { min-width: 100px; }
+.voorraad-table td:nth-child(7) { min-width: 140px; }
+.voorraad-table th:nth-child(8),
+.voorraad-table td:nth-child(8) { min-width: 100px; }
 
-/* Verwijderknop */
+/* Checkbox uitlijnen */
+.voorraad-table input[type="checkbox"] {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+/* Verwijderknop in tabel */
 .voorraad-table button {
   background-color: #e21b24;
   color: white;
@@ -114,4 +130,18 @@
 
 .voorraad-table button:hover {
   background-color: #c8161d;
+}
+
+/* Mobiel */
+@media (max-width: 768px) {
+  .voorraad-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .voorraad-form select,
+  .voorraad-form input,
+  .voorraad-form button {
+    width: 100%;
+  }
 }

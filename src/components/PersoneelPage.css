@@ -22,14 +22,18 @@
   margin: 0 0 14px 0;
   text-align: center;
   color: #333;
+  font-size: 1.4rem;
+  font-weight: bold;
 }
 
-/* Form */
+/* Formulier */
 .personeel-form {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-bottom: 1rem;
+  justify-content: center;
+  align-items: center;
 }
 
 .personeel-form select,
@@ -46,13 +50,18 @@
   color: white;
   cursor: pointer;
   border: none;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  transition: background-color 0.2s ease;
 }
 
 .personeel-form button:hover {
   background-color: #dc2626;
 }
 
-/* Tabel container → zorgt voor scrollen */
+/* Scrollbare tabel wrapper */
 .table-responsive {
   width: 100%;
   overflow-x: auto;
@@ -64,7 +73,7 @@
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
-  min-width: 900px; /* forceer breedte zodat er gescrold kan worden */
+  min-width: 900px; /* forceer breedte zodat scroll op mobiel verschijnt */
 }
 
 .personeel-table th,
@@ -75,15 +84,15 @@
   word-break: break-word;
 }
 
-/* Header kleur (zelfde blauw/wit als VoorraadPage) */
+/* Header styling */
 .personeel-table thead th {
-  background-color: #0066b3;
+  background-color: #0066b3; /* zelfde blauw als VoorraadPage */
   color: #fff;
   font-weight: 600;
   font-size: 0.9rem;
 }
 
-/* Kolombreedtes */
+/* Kolombreedtes (voor betere verdeling) */
 .personeel-table th:nth-child(1),
 .personeel-table td:nth-child(1) { min-width: 120px; }
 .personeel-table th:nth-child(2),
@@ -99,7 +108,7 @@
 .personeel-table th:nth-child(7),
 .personeel-table td:nth-child(7) { min-width: 100px; }
 
-/* Verwijderknop */
+/* Verwijderknop in tabel */
 .personeel-table button {
   background-color: #e21b24;
   color: white;
@@ -113,4 +122,18 @@
 
 .personeel-table button:hover {
   background-color: #c8161d;
+}
+
+/* Mobiel */
+@media (max-width: 768px) {
+  .personeel-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .personeel-form select,
+  .personeel-form input,
+  .personeel-form button {
+    width: 100%;
+  }
 }
