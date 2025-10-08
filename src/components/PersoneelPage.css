@@ -52,7 +52,7 @@
   background-color: #dc2626;
 }
 
-/* Scrollbare tabel wrapper (desktop) */
+/* Scrollbare tabel wrapper */
 .table-responsive {
   width: 100%;
   overflow-x: auto;
@@ -97,7 +97,7 @@
   background-color: #c62828;
 }
 
-/* ✅ Mobile compact card view */
+/* ✅ Mobile card-stijl */
 @media (max-width: 600px) {
   .personeel-table,
   .personeel-table thead,
@@ -143,8 +143,7 @@
     flex-shrink: 0;
   }
 
-  .table-responsive {
-    margin: 0;
-    padding: 0;
+  .personeel-box {
+    padding: 0.8rem;
   }
 }
