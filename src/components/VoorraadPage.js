@@ -224,8 +224,8 @@ export default function VoorraadPage({ user }) {
         <table className="voorraad-table">
           <thead>
             <tr>
-              <th>Van</th>
-              <th>Naar</th>
+              <th>Uitgeleend van</th>
+              <th>Aan</th>
               <th>Item</th>
               <th>Aantal</th>
               <th>Eenheid</th>
