@@ -1,3 +1,4 @@
+/* Container */
 .voorraad-container {
   width: 100%;
   display: flex;
@@ -7,6 +8,7 @@
   box-sizing: border-box;
 }
 
+/* Box */
 .voorraad-box {
   background: #fff;
   border-radius: 8px;
@@ -23,6 +25,7 @@
   color: #333;
 }
 
+/* Formulier */
 .voorraad-form {
   display: flex;
   flex-wrap: wrap;
@@ -38,6 +41,7 @@
   border-radius: 4px;
   border: 1px solid #ccc;
   font-size: 0.9rem;
+  box-sizing: border-box;
 }
 
 .voorraad-form button {
@@ -49,6 +53,7 @@
 }
 .voorraad-form button:hover { background-color: #dc2626; }
 
+/* Scrollbare tabel wrapper */
 .table-responsive {
   width: 100%;
   overflow-x: auto;
@@ -58,10 +63,11 @@
   margin: 0 auto;
 }
 
+/* Desktop tabel */
 .voorraad-table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 850px; /* desktop: scroll afdwingen */
+  min-width: 850px; /* desktop: forceer scroll bij smalle schermen */
 }
 
 .voorraad-table th,
@@ -90,8 +96,28 @@
 }
 .voorraad-table button:hover { background-color: #c62828; }
 
-/* 🔹 Mobile card-stijl */
+/* ✅ Mobile card-stijl + formulier fix */
 @media (max-width: 600px) {
+  .voorraad-container {
+    padding: 0.8rem;
+  }
+
+  /* Formulier onder elkaar en 100% breed */
+  .voorraad-form {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+  }
+
+  .voorraad-form select,
+  .voorraad-form input,
+  .voorraad-form button {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  /* 🔹 Tabel volledig blok-weergave */
   .voorraad-table,
   .voorraad-table thead,
   .voorraad-table tbody,
@@ -100,18 +126,18 @@
   .voorraad-table tr {
     display: block;
     width: 100% !important;
-    min-width: unset !important;
+    min-width: unset !important;  /* haalt de desktop min-width weg */
   }
 
   .voorraad-table thead { display: none; }
 
   .voorraad-table tr {
-    margin-bottom: 0.75rem;
+    margin: 0 0 0.6rem 0;
     border: 1px solid #ddd;
-    border-radius: 6px;
+    border-radius: 4px;
+    padding: 0.3rem;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08);
     background: #fff;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-    padding: 0.5rem;
   }
 
   .voorraad-table td {
@@ -119,8 +145,8 @@
     justify-content: space-between;
     padding: 0.3rem 0.4rem;
     border: none;
-    font-size: 0.85rem;
-    line-height: 1.3;
+    font-size: 0.8rem;
+    line-height: 1.2;
   }
 
   .voorraad-table td:last-child { border-bottom: none; }
@@ -129,7 +155,7 @@
     content: attr(data-label);
     font-weight: 600;
     color: #0066b3;
-    margin-right: 0.4rem;
+    margin-right: 0.3rem;
     flex-shrink: 0;
   }
 
