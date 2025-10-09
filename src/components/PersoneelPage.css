@@ -1,3 +1,4 @@
+/* ====== Container & Box ====== */
 .personeel-container {
   width: 100%;
   display: flex;
@@ -22,6 +23,7 @@
   color: #333;
 }
 
+/* ====== Formulier ====== */
 .personeel-form {
   display: flex;
   flex-wrap: wrap;
@@ -49,6 +51,7 @@
 }
 .personeel-form button:hover { background-color: #dc2626; }
 
+/* ====== Tabel (desktop) ====== */
 .table-responsive {
   width: 100%;
   overflow-x: auto;
@@ -68,6 +71,7 @@
   padding: 0.5rem;
   text-align: left;
   font-size: 0.9rem;
+  vertical-align: top;
 }
 
 .personeel-table thead th {
@@ -88,19 +92,21 @@
 }
 .personeel-table button:hover { background-color: #c62828; }
 
-/* 🔹 Mobile card-stijl */
+/* ====== Mobiel: cards, volle breedte van de box, geen afkappen ====== */
 @media (max-width: 600px) {
+  /* Box gebruikt volle breedte minus 16px (8px links/rechts) */
   .personeel-box {
-    width: 95% !important;   /* box iets smaller, gecentreerd */
+    width: calc(100% - 16px) !important;
     margin: 0 auto;
-    padding: 1rem;
+    padding: 12px;
   }
 
+  /* Formulier onder elkaar en 95% breed (lucht aan zijkanten) */
   .personeel-form {
     flex-direction: column;
     align-items: stretch;
+    gap: 0.6rem;
   }
-
   .personeel-form select,
   .personeel-form input,
   .personeel-form button {
@@ -108,6 +114,7 @@
     margin: 0 auto !important;
   }
 
+  /* Tabel → cards */
   .personeel-table,
   .personeel-table thead,
   .personeel-table tbody,
@@ -117,27 +124,34 @@
     display: block;
     width: 100% !important;
     min-width: unset !important;
+    box-sizing: border-box;
   }
 
   .personeel-table thead { display: none; }
 
+  /* Card (tr) vult de box volledig, nette padding */
   .personeel-table tr {
-    width: 100% !important;   /* kaartjes vullen de hele box */
-    margin: 0 auto 0.75rem auto !important;
+    width: 100% !important;
+    margin: 0 0 12px 0 !important;
     border: 1px solid #ddd;
     border-radius: 6px;
     background: #fff;
     box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-    padding: 0.6rem;
+    padding: 10px;
   }
 
+  /* Cellen wrappen, geen afkappen van tekst of knoppen */
   .personeel-table td {
     display: flex;
     justify-content: space-between;
-    padding: 0.3rem 0.4rem;
+    gap: 8px;
+    padding: 6px 4px;
     border: none;
-    font-size: 0.85rem;
-    line-height: 1.3;
+    font-size: 0.95rem;      /* iets groter voor leesbaarheid */
+    line-height: 1.25;
+    word-break: break-word;  /* lange woorden mogen afbreken */
+    white-space: normal;     /* tekst mag doorlopen op volgende regel */
+    flex-wrap: wrap;         /* waarde & knop lopen desnoods door */
   }
 
   .personeel-table td:last-child { border-bottom: none; }
@@ -146,7 +160,12 @@
     content: attr(data-label);
     font-weight: 600;
     color: #0066b3;
-    margin-right: 0.4rem;
+    margin-right: 6px;
+    flex-shrink: 0;
+  }
+
+  /* Zorg dat actie-knop nooit wordt afgesneden */
+  .personeel-table td button {
     flex-shrink: 0;
   }
 }
