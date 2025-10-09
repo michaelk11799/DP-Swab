@@ -125,7 +125,7 @@
   .personeel-table thead { display: none; }
 
   .personeel-table tr {
-    width: 90% !important;
+    width: 95% !important;
     margin: 0 auto 0.75rem auto !important;
     border: 1px solid #ddd;
     border-radius: 6px;
