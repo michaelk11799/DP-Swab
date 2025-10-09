@@ -176,4 +176,30 @@
   .personeel-table td button {
     flex-shrink: 0;
   }
+
+  /* ==== FORCEER ZELFDE BOX-BREEDTE ALS VOORRAAD ==== */
+/* Desktop / tablet */
+.personeel-container .personeel-box {
+  max-width: 1100px !important;     /* zelfde als voorraad */
+  width: 100% !important;
+  margin: 24px auto 0 auto !important;
+  box-sizing: border-box !important;
+}
+
+/* Mobiel */
+@media (max-width: 600px) {
+  .personeel-container .personeel-box {
+    width: calc(100% - 16px) !important;   /* 8px lucht links/rechts */
+    max-width: calc(100% - 16px) !important;
+    margin: 0 auto !important;
+    padding: 1rem !important;
+  }
+}
+
+/* Zorg dat geen parent de breedte knijpt */
+.content-box,
+.personeel-container {
+  min-width: 0 !important;
+}
+
 }
