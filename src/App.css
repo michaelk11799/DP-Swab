@@ -45,6 +45,7 @@ body {
 
 .dashboard-box,
 .voorraad-box,
+.personeel-box,   /* toegevoegd */
 .login-box {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: saturate(120%) blur(0px);
@@ -58,8 +59,9 @@ body {
   box-sizing: border-box;
 }
 
-.voorraad-box {
-  max-width: 1000px;
+.voorraad-box,
+.personeel-box {   /* toegevoegd */
+  max-width: 1100px;
   margin: 24px auto 0 auto;
 }
 
