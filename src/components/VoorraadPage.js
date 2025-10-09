@@ -11,7 +11,6 @@ import {
   onSnapshot,
   orderBy,
   query,
-  updateDoc,
   serverTimestamp,
 } from "firebase/firestore";
 
@@ -57,8 +56,16 @@ export default function VoorraadPage({ user }) {
   const [item, setItem] = useState("");
   const [quantity, setQuantity] = useState("");
   const [unit, setUnit] = useState("");
+  const [actie, setActie] = useState("");
+  const [status, setStatus] = useState("");
   const [search, setSearch] = useState("");
   const [entries, setEntries] = useState([]);
+
+  // 🔹 filter state
+  const [filterActie, setFilterActie] = useState("");
+  const [filterStore, setFilterStore] = useState("");
+  const [filterDate, setFilterDate] = useState("");
+  const [filterStatus, setFilterStatus] = useState("");
 
   const quantityOptions = useMemo(() => {
     const arr = [];
@@ -93,14 +100,13 @@ export default function VoorraadPage({ user }) {
     return () => unsub();
   }, []);
 
-  // Fix iOS Safari: make sure the scroller starts fully left
   useEffect(() => {
     if (scrollerRef.current) scrollerRef.current.scrollLeft = 0;
   }, [entries.length]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!fromStore || !toStore || !item || !quantity || !unit) {
+    if (!fromStore || !toStore || !item || !quantity || !unit || !actie || !status) {
       alert("Vul alle velden in!");
       return;
     }
@@ -110,8 +116,9 @@ export default function VoorraadPage({ user }) {
       item,
       quantity: parseFloat(quantity),
       unit,
+      actie,
+      status,
       user: user?.name || "Onbekend",
-      returned: false,
       createdAt: serverTimestamp(),
     });
     setFromStore("");
@@ -119,6 +126,8 @@ export default function VoorraadPage({ user }) {
     setItem("");
     setQuantity("");
     setUnit("");
+    setActie("");
+    setStatus("");
     setSearch("");
     if (scrollerRef.current) scrollerRef.current.scrollLeft = 0;
   };
@@ -127,17 +136,12 @@ export default function VoorraadPage({ user }) {
     await deleteDoc(doc(db, "voorraad", id));
   };
 
-  const toggleReturned = async (entry) => {
-    await updateDoc(doc(db, "voorraad", entry.id), {
-      returned: !entry.returned,
-    });
-  };
-
   return (
     <div className="voorraad-container">
       <div className="voorraad-box">
         <h2>Voorraadbeheer</h2>
 
+        {/* Formulier */}
         <form className="voorraad-form" onSubmit={handleSubmit}>
           <select value={fromStore} onChange={(e) => setFromStore(e.target.value)}>
             <option value="">Van winkel</option>
@@ -173,9 +177,60 @@ export default function VoorraadPage({ user }) {
             <option value="">Eenheid</option>
             {units.map((u) => <option key={u} value={u}>{u}</option>)}
           </select>
+
+          <select value={actie} onChange={(e) => setActie(e.target.value)}>
+            <option value="">Actie</option>
+            <option value="Terugbrengen">Terugbrengen</option>
+            <option value="Factureren">Factureren</option>
+          </select>
+
+          <select value={status} onChange={(e) => setStatus(e.target.value)}>
+            <option value="">Al gebeurd?</option>
+            <option value="Ja">Ja</option>
+            <option value="Nee">Nee</option>
+          </select>
+
           <button type="submit">Opslaan</button>
         </form>
 
+        {/* 🔹 Filters */}
+        <div className="voorraad-filters" style={{ margin: "20px 0" }}>
+          <select value={filterActie} onChange={(e) => setFilterActie(e.target.value)}>
+            <option value="">Alle acties</option>
+            <option value="Terugbrengen">Terugbrengen</option>
+            <option value="Factureren">Factureren</option>
+          </select>
+
+          <select value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)}>
+            <option value="">Al gebeurd?</option>
+            <option value="Ja">Ja</option>
+            <option value="Nee">Nee</option>
+          </select>
+
+          <select value={filterStore} onChange={(e) => setFilterStore(e.target.value)}>
+            <option value="">Alle winkels</option>
+            {stores.map((s) => (
+              <option key={s} value={s}>{s}</option>
+            ))}
+          </select>
+
+          <input
+            type="date"
+            value={filterDate}
+            onChange={(e) => setFilterDate(e.target.value)}
+          />
+
+          <button type="button" onClick={() => {
+            setFilterActie("");
+            setFilterStatus("");
+            setFilterStore("");
+            setFilterDate("");
+          }}>
+            Reset filters
+          </button>
+        </div>
+
+        {/* Tabel */}
         <div
           className="table-responsive"
           ref={scrollerRef}
@@ -190,35 +245,41 @@ export default function VoorraadPage({ user }) {
                 <th>Item</th>
                 <th>Aantal</th>
                 <th>Eenheid</th>
+                <th>Actie</th>
+                <th>Al gebeurd?</th>
                 <th>Door</th>
-                <th>Teruggebracht?</th>
                 <th>Acties</th>
               </tr>
             </thead>
             <tbody>
-              {entries.length === 0 ? (
-                <tr><td colSpan="8">Nog geen transacties ingevoerd.</td></tr>
-              ) : (
-                entries.map((entry) => (
+              {entries
+                .filter((entry) => {
+                  if (filterActie && entry.actie !== filterActie) return false;
+                  if (filterStatus && entry.status !== filterStatus) return false;
+                  if (filterStore && entry.fromStore !== filterStore && entry.toStore !== filterStore) return false;
+                  if (filterDate) {
+                    const entryDate = entry.createdAt?.toDate?.().toISOString().slice(0,10);
+                    if (entryDate !== filterDate) return false;
+                  }
+                  return true;
+                })
+                .map((entry) => (
                   <tr key={entry.id}>
                     <td data-label="Uitgeleend van">{entry.fromStore}</td>
                     <td data-label="Aan">{entry.toStore}</td>
                     <td data-label="Item">{entry.item}</td>
                     <td data-label="Aantal">{entry.quantity}</td>
                     <td data-label="Eenheid">{entry.unit}</td>
+                    <td data-label="Actie">{entry.actie}</td>
+                    <td data-label="Al gebeurd?">{entry.status}</td>
                     <td data-label="Door">{entry.user}</td>
-                    <td data-label="Teruggebracht?">
-                      <input
-                        type="checkbox"
-                        checked={entry.returned}
-                        onChange={() => toggleReturned(entry)}
-                      />
-                    </td>
                     <td data-label="Acties">
                       <button onClick={() => handleDelete(entry.id)}>Verwijderen</button>
                     </td>
                   </tr>
-                ))
+                ))}
+              {entries.length === 0 && (
+                <tr><td colSpan="9">Nog geen transacties ingevoerd.</td></tr>
               )}
             </tbody>
           </table>

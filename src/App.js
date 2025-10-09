@@ -6,6 +6,8 @@ import PersoneelPage from "./components/PersoneelPage";
 import AdminPage from "./components/AdminPage";
 import { BrowserRouter as Router, Routes, Route, Navigate, Link } from "react-router-dom";
 import "./App.css";
+import "./migrateReturned";
+
 
 export default function App() {
   const [user, setUser] = useState(() => {
