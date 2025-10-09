@@ -89,8 +89,11 @@ export default function PersoneelPage({ user }) {
           />
           <input
             type="date"
+            name="datum"
+            placeholder="Kies datum"
             value={date}
             onChange={(e) => setDate(e.target.value)}
+            required
           />
           <button type="submit">Opslaan</button>
         </form>

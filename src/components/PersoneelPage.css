@@ -14,7 +14,7 @@
   border-radius: 8px;
   padding: 1.5rem;
   width: 100%;
-  max-width: 1100px; /* zelfde als Voorraad */
+  max-width: 1100px; /* zelfde breedte als Voorraad */
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   margin: 24px auto 0 auto;
   box-sizing: border-box;
@@ -45,21 +45,30 @@
   box-sizing: border-box;
 }
 
-/* 🔹 Datum input fix */
+/* 🔹 Datum input fix met fake placeholder */
 .personeel-form input[type="date"] {
-  color: #000;             /* tekst altijd zwart */
-  background-color: #fff;  /* witte achtergrond */
+  color: #000;             
+  background-color: #fff;  
   font-size: 14px;
   padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 4px;
-  -webkit-appearance: none; /* iOS Safari */
+  -webkit-appearance: none; 
   appearance: none;
+  position: relative;
 }
 
-.personeel-form input[type="date"]::placeholder {
+/* Toon placeholder tekst als veld leeg is */
+.personeel-form input[type="date"]:not(:focus):invalid::before {
+  content: attr(placeholder);
   color: #555;
-  opacity: 1;
+  font-size: 14px;
+}
+
+/* Verberg placeholder zodra er een datum gekozen is */
+.personeel-form input[type="date"]:focus::before,
+.personeel-form input[type="date"]:valid::before {
+  content: "";
 }
 
 .personeel-form button {
