@@ -177,10 +177,12 @@
     flex-shrink: 0;
   }
 
-  /* ==== FORCEER ZELFDE BOX-BREEDTE ALS VOORRAAD ==== */
+/* ===== FORCEER EXACT ZELFDE BOX-BREEDTE ALS VOORRAAD ===== */
+
 /* Desktop / tablet */
-.personeel-container .personeel-box {
-  max-width: 1100px !important;     /* zelfde als voorraad */
+html body .page-container .content-box .personeel-container .personeel-box,
+html body .personeel-container .personeel-box {
+  max-width: 1100px !important;   /* zelfde als voorraad */
   width: 100% !important;
   margin: 24px auto 0 auto !important;
   box-sizing: border-box !important;
@@ -188,15 +190,16 @@
 
 /* Mobiel */
 @media (max-width: 600px) {
-  .personeel-container .personeel-box {
-    width: calc(100% - 16px) !important;   /* 8px lucht links/rechts */
+  html body .page-container .content-box .personeel-container .personeel-box,
+  html body .personeel-container .personeel-box {
+    width: calc(100% - 16px) !important;   /* exact visueel als voorraad */
     max-width: calc(100% - 16px) !important;
     margin: 0 auto !important;
     padding: 1rem !important;
   }
 }
 
-/* Zorg dat geen parent de breedte knijpt */
+/* voorkom dat een parent de breedte knijpt */
 .content-box,
 .personeel-container {
   min-width: 0 !important;
