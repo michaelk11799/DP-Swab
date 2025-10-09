@@ -63,11 +63,11 @@
   margin: 0 auto;
 }
 
-/* Desktop tabel (zelfde gedrag als Voorraad) */
+/* Desktop tabel — exact als Voorraad */
 .personeel-table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 850px; /* desktop: dwing horizontale scroll bij smalle schermen */
+  min-width: 850px; /* dwing scroll af op smalle desktop schermen */
 }
 
 .personeel-table th,
@@ -146,7 +146,7 @@
     justify-content: space-between;
     padding: 0.3rem 0.4rem;
     border: none;
-    font-size: 0.8rem;
+    font-size: 0.8rem;      /* zelfde als Voorraad */
     line-height: 1.2;
     word-break: break-word;
     white-space: normal;
