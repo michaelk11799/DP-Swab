@@ -160,4 +160,18 @@ body {
     padding: 12px;
     font-size: 1rem;
   }
+
+  /* Zorg dat de route-content (Personeel/Voorraad/Admin) de volle breedte kan pakken */
+.content-box {
+  flex: 1 1 1000px;   /* rekt mee naast de dashboard-box */
+  min-width: 0;       /* voorkomt shrink-to-fit knijpen */
+  display: flex;      /* centreer de binnen-box */
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Op mobiel: content-box altijd 100% breed */
+@media (max-width: 600px) {
+  .content-box { width: 100%; }
+}
 }

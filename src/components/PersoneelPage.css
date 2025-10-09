@@ -205,4 +205,20 @@ html body .personeel-container .personeel-box {
   min-width: 0 !important;
 }
 
+/* Forceer dat de witte box net zo breed mag als Voorraad */
+.personeel-container .personeel-box {
+  max-width: 1100px !important;
+  width: 100% !important;
+  margin: 24px auto 0 auto !important;
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 600px) {
+  .personeel-container .personeel-box {
+    width: calc(100% - 16px) !important; /* zelfde look als voorraad */
+    max-width: calc(100% - 16px) !important;
+    margin: 0 auto !important;
+  }
+}
+
 }
