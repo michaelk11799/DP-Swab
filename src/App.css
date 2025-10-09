@@ -44,8 +44,6 @@ body {
 }
 
 .dashboard-box,
-.voorraad-box,
-.personeel-box,   /* toegevoegd */
 .login-box {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: saturate(120%) blur(0px);
@@ -53,16 +51,23 @@ body {
   border-radius: 12px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
   width: 100%;
-  max-width: 400px;
+  max-width: 400px; /* alleen voor dashboard & login */
   text-align: center;
   margin: 0 auto;
   box-sizing: border-box;
 }
 
 .voorraad-box,
-.personeel-box {   /* toegevoegd */
-  max-width: 1100px;
+.personeel-box {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: saturate(120%) blur(0px);
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+  width: 100%;
+  max-width: 1100px; /* breed voor voorraad & personeel */
   margin: 24px auto 0 auto;
+  box-sizing: border-box;
 }
 
 .dashboard-logo {
