@@ -149,6 +149,7 @@ body {
 
   .dashboard-box,
   .voorraad-box,
+  .personeel-box,   /* ✅ toegevoegd zodat Personeel gelijk is */
   .login-box {
     max-width: 100% !important;
     width: calc(100% - 16px);
@@ -161,17 +162,13 @@ body {
     font-size: 1rem;
   }
 
-  /* Zorg dat de route-content (Personeel/Voorraad/Admin) de volle breedte kan pakken */
-.content-box {
-  flex: 1 1 1000px;   /* rekt mee naast de dashboard-box */
-  min-width: 0;       /* voorkomt shrink-to-fit knijpen */
-  display: flex;      /* centreer de binnen-box */
-  justify-content: center;
-  align-items: flex-start;
+  .content-box {
+    flex: 1 1 1000px;
+    min-width: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;  /* ✅ hier gewoon breedte regelen */
+  }
 }
 
-/* Op mobiel: content-box altijd 100% breed */
-@media (max-width: 600px) {
-  .content-box { width: 100%; }
-}
-}
