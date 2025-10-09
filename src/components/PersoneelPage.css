@@ -3,8 +3,6 @@
   display: flex;
   justify-content: center;
   padding: 1rem;
-  margin: 0 auto;
-  box-sizing: border-box;
 }
 
 .personeel-box {
@@ -14,8 +12,8 @@
   width: 100%;
   max-width: 1100px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  margin: 0 auto;
   box-sizing: border-box;
+  margin: 0 auto;
 }
 
 .personeel-box h2 {
@@ -57,7 +55,6 @@
   -webkit-overflow-scrolling: touch;
   display: block;
   text-align: left;
-  margin: 0 auto;
 }
 
 .personeel-table {
@@ -91,10 +88,10 @@
 }
 .personeel-table button:hover { background-color: #c62828; }
 
-/* ✅ Mobile fix */
+/* 🔹 Mobile card-stijl */
 @media (max-width: 600px) {
   .personeel-box {
-    width: 95% !important;
+    width: 95% !important;   /* box iets smaller, gecentreerd */
     margin: 0 auto;
     padding: 1rem;
   }
@@ -125,7 +122,7 @@
   .personeel-table thead { display: none; }
 
   .personeel-table tr {
-    width: 95% !important;
+    width: 100% !important;   /* kaartjes vullen de hele box */
     margin: 0 auto 0.75rem auto !important;
     border: 1px solid #ddd;
     border-radius: 6px;
